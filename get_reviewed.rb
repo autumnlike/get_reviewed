@@ -24,6 +24,7 @@ repository = ARGV[1]
 label_name = ARGV[2]
 
 client = Octokit::Client.new(access_token: token)
+client.auto_paginate = true
 client.pull_requests(repository).each do |pr|
   pr.rels[:issue].get.data.rels[:labels].get.data.each do |label|
     if label[:name] == label_name

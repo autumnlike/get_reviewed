@@ -14,13 +14,13 @@ require "csv"
 # @param 4 label: 集計するラベル名
 # @param 5 ignore_labels: 除外ラベル名(カンマ区切り)
 #
-# ruby ./get_pull_request_csv.rb <token> <repository_name> <label> <ignore_labels>
+# ruby ./get_pull_request_csv.rb <token> <repository_name> <from> <to> <label> <ignore_labels>
 
 if ARGV.count != 5 && ARGV.count != 6
   puts "引数が違います"
-  puts "ruby ./get_reviewed.rb <token> <repository_name> <label> <ignore_labels>"
-  puts "ex: ruby ./get_reviewed.rb tokentokentoken username/repository_name label_name"
-  puts "ex: ruby ./get_reviewed.rb tokentokentoken username/repository_name label_name 'ignore1, ignore2'"
+  puts "ruby ./get_reviewed.rb <token> <repository_name> <from> <to> <label> <ignore_labels>"
+  puts "ex: ruby ./get_reviewed.rb tokentokentoken username/repository_name 2019-10-01 2020-01-01 label_name"
+  puts "ex: ruby ./get_reviewed.rb tokentokentoken username/repository_name 2019-10-01 2020-01-01 label_name 'ignore1, ignore2'"
   exit
 end
 

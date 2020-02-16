@@ -3,20 +3,22 @@
 require 'octokit'
 require "pry" # 開発用
 require "csv"
+require "dotenv"
+
+Dotenv.load
 
 # 仕様
 # master にマージされた Pull Request の CSV を生成
 #
-# @param 0 token: github トークン
-# @param 1 repository: リポジトリ
-# @param 2 from: 集計開始日
-# @param 3 to: 集計終了日
-# @param 4 label: 集計するラベル名
-# @param 5 ignore_labels: 除外ラベル名(カンマ区切り)
+# @param 0 repository: リポジトリ
+# @param 1 from: 集計開始日
+# @param 2 to: 集計終了日
+# @param 3 label: 集計するラベル名
+# @param 4 ignore_labels: 除外ラベル名(カンマ区切り)
 #
-# ruby ./get_pull_request_csv.rb <token> <repository_name> <from> <to> <label> <ignore_labels>
+# ruby ./get_pull_request_csv.rb <repository_name> <from> <to> <label> <ignore_labels>
 
-if ARGV.count != 5 && ARGV.count != 6
+if ARGV.count != 4 && ARGV.count != 5
   puts "引数が違います"
   puts "ruby ./get_reviewed.rb <token> <repository_name> <from> <to> <label> <ignore_labels>"
   puts "ex: ruby ./get_reviewed.rb tokentokentoken username/repository_name 2019-10-01 2020-01-01 label_name"
@@ -24,13 +26,13 @@ if ARGV.count != 5 && ARGV.count != 6
   exit
 end
 
-token = ARGV[0]
-repository = ARGV[1]
-from = Time.parse ARGV[2]
-to = Time.parse ARGV[3]
-label_name = ARGV[4]
+token = ENV['GITHUB_TOKEN']
+repository = ARGV[0]
+from = Time.parse ARGV[1]
+to = Time.parse ARGV[2]
+label_name = ARGV[3]
 ignore_labels = []
-ignore_labels = ARGV[5].split(',') unless ARGV[3].nil?
+ignore_labels = ARGV[4].split(',') unless ARGV[2].nil?
 
 developers = [
   ['number', 'name', 'created_at', 'merged_at', 'labels']

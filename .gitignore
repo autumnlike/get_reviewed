@@ -1,2 +1,15 @@
 /tmp/*.csv
 .env
+
+# vim
+######################
+*~
+*.swp
+*.swo
+
+# OS generated files #
+######################
+
+.DS_Store
+.DS_Store?
+._*

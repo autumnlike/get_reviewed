@@ -45,7 +45,8 @@ client = Octokit::Client.new(access_token: token)
 client.auto_paginate = true
 
 client.pull_requests(repository, state: 'close', sort: 'updated', direction: 'desc').each do |pr|
-  next if !pr.merged_at.nil? && pr.updated_at > to
+  next if !pr.merged_at.nil? && pr.merged_at > to
+  next if !pr.merged_at.nil? && pr.merged_at < from
   break if !pr.merged_at.nil? && pr.updated_at < from
 
   next unless pr.base.ref == 'master' # マスターマージだけ

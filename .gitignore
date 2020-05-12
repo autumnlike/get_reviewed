@@ -7,6 +7,10 @@
 *.swp
 *.swo
 
+# bundle
+######################
+.bundle/*
+
 # OS generated files #
 ######################
 

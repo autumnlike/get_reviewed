@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+require 'bundler/setup'
 require 'octokit'
 require "pry" # 開発用
 require "csv"

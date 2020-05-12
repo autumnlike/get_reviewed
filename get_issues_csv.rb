@@ -33,7 +33,7 @@ ignore_labels = []
 ignore_labels = ARGV[2].split(',') unless ARGV[2].nil?
 
 rows = [
-  ['number', 'state', 'title', 'body', 'created_user', 'labels', 'url', 'created_at', 'closed_at']
+  ['number', 'state', 'title', 'body', 'created_user', 'assignees', 'labels', 'url', 'created_at', 'closed_at']
 ]
 
 client = Octokit::Client.new(access_token: token)
@@ -42,6 +42,7 @@ client.auto_paginate = true
 client.issues(repository, labels: label_name, state: 'all', sort: 'updated', direction: 'desc').each do |issue|
   next unless issue.pull_request.nil?
   labels = issue.labels.map{ |l| l[:name] }
+  assignees = issue.assignees.map{ |a| a[:login] }
 
   rows << [
     issue.number,
@@ -49,6 +50,7 @@ client.issues(repository, labels: label_name, state: 'all', sort: 'updated', dir
     issue.title,
     issue.body,
     issue.user.login,
+    assignees.join("\n"),
     labels.join("\n"),
     issue.html_url,
     issue.created_at,

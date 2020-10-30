@@ -16,7 +16,7 @@ Dotenv.load
 # @param 1 label: 集計するラベル名
 # @param 2 ignore_labels: 除外ラベル名(カンマ区切り)
 #
-# ruby ./get_issues_csv.rb <repository_name> <from> <to> <label> <ignore_labels>
+# ruby ./get_issues_csv.rb <repository_name> <label> <ignore_labels>
 
 if ARGV.count != 2 && ARGV.count != 3
   puts "引数が違います"

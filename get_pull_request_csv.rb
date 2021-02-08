@@ -33,7 +33,7 @@ from = Time.parse ARGV[1]
 to = Time.parse ARGV[2]
 label_name = ARGV[3]
 ignore_labels = []
-ignore_labels = ARGV[4].split(',') unless ARGV[2].nil?
+ignore_labels = ARGV[4].split(',') unless ARGV[4].nil?
 
 developers = [
   ['number', 'name', 'created_at', 'merged_at', 'labels']

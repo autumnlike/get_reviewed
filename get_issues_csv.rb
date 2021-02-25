@@ -33,7 +33,7 @@ ignore_labels = []
 ignore_labels = ARGV[2].split(',') unless ARGV[2].nil?
 
 rows = [
-  ['number', 'state', 'title', 'body', 'created_user', 'assignees', 'labels', 'url', 'created_at', 'closed_at']
+  ['number', 'state', 'title', 'body', 'created_user', 'assignees', 'labels', 'url', 'created_at', 'created_month', 'closed_at', 'closed_month']
 ]
 
 client = Octokit::Client.new(access_token: token)
@@ -54,7 +54,9 @@ client.issues(repository, labels: label_name, state: 'all', sort: 'updated', dir
     labels.join("\n"),
     issue.html_url,
     issue.created_at,
-    issue.closed_at
+    issue.created_at.strftime("%Y%m"),
+    issue.closed_at,
+    issue.closed_at.nil? ? nil : issue.closed_at.strftime("%Y%m")
   ]
 
 end
